@@ -599,3 +599,18 @@ section {
     padding: 22px;
   }
 }
+
+.form-message {
+  max-width: 900px;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: 1px solid #706ba8;
+  border-left: 4px solid var(--blue2);
+  border-radius: 7px;
+  background: #0b0a2d;
+  color: var(--text);
+}
+
+.form-message[hidden] {
+  display: none;
+}

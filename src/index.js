@@ -22,7 +22,7 @@ async function handleContact(request, env) {
     const vehicleModel = cleanText(formData.get("vehicle_model"), 80);
     const vehicleYear = cleanText(formData.get("vehicle_year"), 4);
     const vehicleRegistration = normaliseRegistration(
-      formData.get("vehicle_registration")
+      formData.get("vehicle_registration"),
     );
     const message = cleanText(formData.get("message"), 3000);
 
@@ -42,6 +42,15 @@ async function handleContact(request, env) {
       "accessories-wiring",
       "other",
     ]);
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+
+    const { success } = await env.CONTACT_RATE_LIMITER.limit({
+      key: `contact:${ip}`,
+    });
+
+    if (!success) {
+      return redirect("/contact.html?error=rate");
+    }
 
     if (
       !firstName ||
@@ -75,7 +84,7 @@ async function handleContact(request, env) {
     const turnstileValid = await verifyTurnstile(
       turnstileToken,
       request,
-      env.TURNSTILE_SECRET
+      env.TURNSTILE_SECRET,
     );
 
     if (!turnstileValid) {
@@ -166,7 +175,7 @@ async function verifyTurnstile(token, request, secret) {
     {
       method: "POST",
       body,
-    }
+    },
   );
 
   if (!response.ok) {
@@ -191,11 +200,7 @@ function normaliseRegistration(value) {
     return "";
   }
 
-  return value
-    .trim()
-    .toUpperCase()
-    .replace(/\s+/g, " ")
-    .slice(0, 20);
+  return value.trim().toUpperCase().replace(/\s+/g, " ").slice(0, 20);
 }
 
 function isValidEmail(value) {

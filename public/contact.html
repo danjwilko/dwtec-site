@@ -80,7 +80,7 @@
                 an accurate answer or quotation.
               </p>
             </div>
-
+            <div id="form-message" class="form-message" hidden></div>
             <form class="contact-form" action="/api/contact" method="post">
 
               <div class="form-grid">
@@ -209,7 +209,8 @@
               <div
                 class="cf-turnstile"
                 data-sitekey="0x4AAAAAAFK8hOwbjlYfPa9h"
-                data-action="contact">
+                data-action="contact"
+                data-error-callback="handleTurnstileError">
                 
               </div>
 
