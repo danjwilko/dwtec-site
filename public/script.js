@@ -59,7 +59,9 @@ const errorMessages = {
   send:
     "Your enquiry could not be sent. Please try again in a moment.",
   server:
-    "Something went wrong while sending your enquiry. Please try again."
+    "Something went wrong while sending your enquiry. Please try again.",
+  rate:
+  "Too many enquiries have been submitted from this connection. Please wait a minute and try again.",
 };
 
 if (error && formMessage) {
