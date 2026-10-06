@@ -44,7 +44,8 @@
         }
 
         const allowedServices = new Set([
-        "dashcam",
+        "single-dashcam",
+        "dual-dashcam",
         "audio",
         "reversing-camera",
         "windscreen-chip",
