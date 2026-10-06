@@ -102,7 +102,8 @@
         }
 
         const serviceLabel = {
-        dashcam: "Dashcam installation",
+        "single-dashcam": "Front Dashcam installation",
+        "dual-dashcam": "Front and rear Dashcam installation",
         audio: "Audio / stereo / Apple CarPlay",
         "reversing-camera": "Reversing camera",
         "windscreen-chip": "Windscreen chip repair",
